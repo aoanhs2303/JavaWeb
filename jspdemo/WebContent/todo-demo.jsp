@@ -1,0 +1,44 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.*" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+</head>
+<body>
+	<form action="todo-demo.jsp">
+		Add new item: <input class="form-control" type="text" name="theItem">
+		<button class="btn btn-info" type="submit">Thêm</button>	
+	</form>
+	<br>
+	Item entered: <%= request.getParameter("theItem") %>
+	<%
+		List<String> items = (List<String>) session.getAttribute("myToDoList");
+		if(items == null) {
+			items = new ArrayList<String>();
+			session.setAttribute("myToDoList", items);
+		} 
+		
+		String theItem = request.getParameter("theItem");
+		if(theItem != null){
+			items.add(theItem);
+		}
+		
+	%>
+	<hr>
+	<b>To do list Items: </b>
+	<ol>
+		<%
+			for(String temp: items) {
+				out.println("<li>"+temp+"</li>");
+			}
+		%>
+	</ol>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+</body>
+</html>
