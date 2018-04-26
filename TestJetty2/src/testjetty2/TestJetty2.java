@@ -43,7 +43,7 @@ public class TestJetty2 {
             context2.addServlet(new ServletHolder(new HapaxServlet()),"");
             
             WebAppContext webapp = new WebAppContext();
-            webapp.setContextPath("/ctx1");
+            webapp.setContextPath("/hello");
             webapp.setResourceBase("src/testjetty2");
             
             ContextHandlerCollection contexts = new ContextHandlerCollection();
